@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: note-project
+
+  profiles:
+    active: local
+
+  datasource:
+    # allowPublicKeyRetrieval=true 是 MySQL 8 用密码登录时必须给的参数，
+    # 少了它常见报错：Public Key Retrieval is not allowed
+    url: jdbc:mysql://localhost:3306/course_project?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: dev_user
+    # 密码来自 application-local.yml；如果那里也没有，就读环境变量 DB_PASSWORD
+    password: ${DB_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  configuration:
+    # 开启驼峰命名映射：数据库的 created_at 自动对应 Java 里的 createdAt
+    map-underscore-to-camel-case: true
